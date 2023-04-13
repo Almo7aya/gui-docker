@@ -39,7 +39,7 @@ RUN ln -s /opt/noVNC/vnc.html /opt/noVNC/index.html
 RUN ln -snf /usr/share/zoneinfo/UTC /etc/localtime && echo UTC > /etc/timezone
 
 # Add in a health status
-HEALTHCHECK --start-period=10s CMD bash -c "if [ \"`pidof -x Xtigervnc | wc -l`\" == "1" ]; then exit 0; else exit 1; fi"
+# HEALTHCHECK --start-period=10s CMD bash -c "if [ \"`pidof -x Xtigervnc | wc -l`\" == "1" ]; then exit 0; else exit 1; fi"
 
 # Add in non-root user
 ARG USER=dockerUser
@@ -52,6 +52,10 @@ RUN useradd -m -s /bin/bash -N -u ${UID_OF_DOCKERUSER} dockerUser && \
     chmod g+w /etc/passwd && \
     chown -R dockerUser:users /home/dockerUser && \
     chown dockerUser:users /opt
+
+COPY supervisord.conf /etc/
+
+RUN export DISPLAY=:0.0
 
 USER dockerUser
 
