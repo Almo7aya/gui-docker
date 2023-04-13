@@ -3,8 +3,9 @@ FROM manjarolinux/base
 RUN pacman -Sy --noconfirm archlinux-keyring
 RUN pacman -Syyu --noconfirm
 RUN pacman -S --noconfirm \
-    i3status \
-    i3-wm \
+    # i3status \
+    # i3-wm \
+    fluxbox \
     git \
     sudo \
     net-tools \
