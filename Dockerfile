@@ -11,7 +11,7 @@ ENV VNC_PASSWD=123456
 ENV APT_INSTALL_PRE="apt -o Acquire::ForceIPv4=true update && DEBIAN_FRONTEND=noninteractive apt -o Acquire::ForceIPv4=true install -y --no-install-recommends"
 ENV APT_INSTALL_POST="&& apt clean -y"
 # Make sure the dependencies are met
-RUN eval ${APT_INSTALL_PRE} tigervnc-standalone-server tigervnc-common xfce4-session xfce4-goodies eterm xterm git net-tools python python-numpy ca-certificates scrot sudo ${APT_INSTALL_POST}
+RUN eval ${APT_INSTALL_PRE} tigervnc-standalone-server tigervnc-common xfce4-session xfce4-goodies eterm xterm git net-tools python3 python3-numpy ca-certificates scrot sudo ${APT_INSTALL_POST}
 
 # Install VNC. Requires net-tools, python and python-numpy
 RUN git clone --branch v1.2.0 --single-branch https://github.com/novnc/noVNC.git /opt/noVNC
