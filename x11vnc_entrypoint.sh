@@ -1,4 +1,4 @@
-/usr/bin/fluxbox &
+/usr/bin/xfce4-session &
 # fix for clipboard being passed through
 vncconfig -nowin &
 
