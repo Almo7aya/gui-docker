@@ -46,24 +46,26 @@ ARG USER=dockerUser
 
 ENV UID_OF_DOCKERUSER 1001
 
-RUN useradd -m -s /bin/bash -N -u ${UID_OF_DOCKERUSER} dockerUser && \
-    echo "dockerUser ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers && \
-    chmod 0440 /etc/sudoers && \
-    chmod g+w /etc/passwd && \
-    chown -R dockerUser:users /home/dockerUser && \
-    chown dockerUser:users /opt
+# RUN useradd -m -s /bin/bash -N -u ${UID_OF_DOCKERUSER} dockerUser && \
+#     echo "dockerUser ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers && \
+#     chmod 0440 /etc/sudoers && \
+#     chmod g+w /etc/passwd && \
+#     chown -R dockerUser:users /home/dockerUser && \
+#     chown dockerUser:users /opt
 
 COPY supervisord.conf /etc/
 
 RUN export DISPLAY=:0.0
 
-USER dockerUser
+RUN useradd -m user
+WORKDIR /home/user
+# USER dockerUser
 
 # Copy various files to their respective places
-COPY --chown=dockerUser:users container_startup.sh /opt/container_startup.sh
-COPY --chown=dockerUser:users x11vnc_entrypoint.sh /opt/x11vnc_entrypoint.sh
+# COPY --chown=dockerUser:users container_startup.sh /opt/container_startup.sh
+# COPY --chown=dockerUser:users x11vnc_entrypoint.sh /opt/x11vnc_entrypoint.sh
 # Subsequent images can put their scripts to run at startup here
-RUN mkdir /opt/startup_scripts
+# RUN mkdir /opt/startup_scripts
 
 # ENTRYPOINT ["/opt/container_startup.sh"]
 CMD ["/usr/bin/supervisord"]
