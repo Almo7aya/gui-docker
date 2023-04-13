@@ -1,4 +1,4 @@
-/usr/bin/xfce4-session &
+/usr/bin/i3 &
 # fix for clipboard being passed through
 vncconfig -nowin &
 
