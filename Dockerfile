@@ -32,8 +32,9 @@ ENV UID_OF_DOCKERUSER 1000
 RUN useradd -m -s /bin/bash -N -u ${UID_OF_DOCKERUSER} dockerUser && \
     echo "dockerUser ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers && \
     chmod 0440 /etc/sudoers && \
-    chmod g+w /etc/passwd \
-    chown -R dockerUser:users /home/dockerUser && chown dockerUser:users /opt
+    chmod g+w /etc/passwd && \
+    chown -R dockerUser:users /home/dockerUser && \
+    chown dockerUser:users /opt
 
 USER dockerUser
 
