@@ -44,7 +44,7 @@ HEALTHCHECK --start-period=10s CMD bash -c "if [ \"`pidof -x Xtigervnc | wc -l`\
 # Add in non-root user
 ARG USER=dockerUser
 
-ENV UID_OF_DOCKERUSER 1000
+ENV UID_OF_DOCKERUSER 1001
 
 RUN useradd -m -s /bin/bash -N -u ${UID_OF_DOCKERUSER} dockerUser && \
     echo "dockerUser ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers && \
