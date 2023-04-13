@@ -16,13 +16,12 @@ RUN pacman -S --noconfirm \
     xorg-server \
     xorg-apps \
     xorg-server-xvfb \
-    xorg-xinit \
-    tigervnc-standalone-server \
-    tigervnc-common
-
+    xorg-xinit
 
 # for the VNC connection
 EXPOSE 5900
+
+EXPOSE 8083
 # for the browser VNC client
 EXPOSE 5901
 # Use environment variable to allow custom VNC passwords
@@ -62,4 +61,6 @@ COPY --chown=dockerUser:users x11vnc_entrypoint.sh /opt/x11vnc_entrypoint.sh
 # Subsequent images can put their scripts to run at startup here
 RUN mkdir /opt/startup_scripts
 
-ENTRYPOINT ["/opt/container_startup.sh"]
+# ENTRYPOINT ["/opt/container_startup.sh"]
+CMD ["/usr/bin/supervisord"]
+
